@@ -17,7 +17,7 @@
                 </repository>
                 <repository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/APIprotector/API-Protector</url>
+                    <url>https://maven.pkg.github.com/apiprotector/API-Protector</url>
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>
@@ -29,7 +29,7 @@
     <servers>
         <server>
             <id>github</id>
-            <username>${env.GITHUB_TOKEN}</username>
+            <username>${env.GITHUB_USERNAME}</username>
             <password>${env.GITHUB_TOKEN}</password>
         </server>
     </servers>
