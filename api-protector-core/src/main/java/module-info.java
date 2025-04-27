@@ -5,5 +5,5 @@ module api.protector.core {
     requires io.swagger.v3.oas.models;
     requires openapi.diff.core;
 
-    opens com.apiprotector.core;
+    exports com.apiprotector.core;
 }

@@ -25,9 +25,11 @@ public class JsonRenderer implements Render {
 
         Map<String, Object> result = new LinkedHashMap<>();
 
-        result.put("title", diff.getNewSpecOpenApi().getInfo().getTitle());
+        String title = diff.getNewSpecOpenApi().getInfo().getTitle();
+        if (title != null) {
+            result.put("title", diff.getNewSpecOpenApi().getInfo().getTitle());
+        }
         result.put("compatible", diff.isCompatible());
-
         result.put("newEndpoints", endpointsToList(diff.getNewEndpoints()));
         result.put("missingEndpoints", endpointsToList(diff.getMissingEndpoints()));
         result.put("deprecatedEndpoints", endpointsToList(diff.getDeprecatedEndpoints()));
