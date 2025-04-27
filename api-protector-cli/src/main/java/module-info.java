@@ -4,6 +4,7 @@ module api.protector.cli {
     requires org.slf4j;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.dataformat.yaml;
 
-    opens com.apiprotector.cli;
+    exports com.apiprotector.cli;
 }
