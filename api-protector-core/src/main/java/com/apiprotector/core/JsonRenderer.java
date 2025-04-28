@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.parameters.Parameter;
+import org.apache.commons.collections4.map.SingletonMap;
 import org.openapitools.openapidiff.core.exception.RendererException;
 import org.openapitools.openapidiff.core.model.*;
 import org.openapitools.openapidiff.core.output.Render;
@@ -25,8 +26,7 @@ public class JsonRenderer implements Render {
 
         Map<String, Object> result = new LinkedHashMap<>();
 
-        String title = diff.getNewSpecOpenApi().getInfo().getTitle();
-        if (title != null) {
+        if (diff.getNewSpecOpenApi().getInfo() != null && diff.getNewSpecOpenApi().getInfo().getTitle() != null) {
             result.put("title", diff.getNewSpecOpenApi().getInfo().getTitle());
         }
         result.put("compatible", diff.isCompatible());
@@ -101,7 +101,10 @@ public class JsonRenderer implements Render {
         if (changedParams == null) return params;
 
         for (Parameter param : changedParams.getIncreased()) {
-            params.add(Map.of("action", "add", "name", param.getName(), "in", param.getIn(), "$ref", param.get$ref()));
+            params.add(new SingletonMap<>("action", "add"));
+            params.add(new SingletonMap<>("name", param.getName()));
+            params.add(new SingletonMap<>("in", param.getIn()));
+            params.add(new SingletonMap<>("$ref", param.get$ref()));
         }
 
         for (ChangedParameter changed : changedParams.getChanged()) {
@@ -115,7 +118,10 @@ public class JsonRenderer implements Render {
         }
 
         for (Parameter param : changedParams.getMissing()) {
-            params.add(Map.of("action", "delete", "name", param.getName(), "in", param.getIn(), "$ref", param.get$ref()));
+            params.add(new SingletonMap<>("action", "delete"));
+            params.add(new SingletonMap<>("name", param.getName()));
+            params.add(new SingletonMap<>("in", param.getIn()));
+            params.add(new SingletonMap<>("$ref", param.get$ref()));
         }
 
         return params;
