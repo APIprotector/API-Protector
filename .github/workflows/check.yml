@@ -12,6 +12,8 @@ jobs:
       - name: Change to correct module
         run: |
           cd ./api-protector-cli
+          ls -al
+          pwd
 
       - name: Add executable permissions
         run: chmod a+x mvnw
