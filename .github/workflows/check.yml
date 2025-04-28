@@ -9,6 +9,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Change to correct module
+        run: |
+          cd ./api-protector-cli
+
+      - name: Add executable permissions
+        run: chmod a+x mvnw
+
       - name: Build project
         run: ./mvnw package
 
