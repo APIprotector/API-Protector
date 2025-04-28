@@ -9,12 +9,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21 and Maven 
+      - name: Setup java
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'correto'
           cache: 'maven'
+          distribution: 'corretto'
 
       - name: Build project with Maven
         run: mvn -B package --file api-protector-cli/pom.xml 
