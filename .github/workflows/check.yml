@@ -9,13 +9,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Add executable permissions
-        run: chmod +x mvnw
-        working-directory: ./api-protector-cli 
-  
-      - name: Build project
-        run: ./mvnw package
-        working-directory: ./api-protector-cli 
+      - name: Set up JDK 21 and Maven 
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'correto'
+          cache: 'maven'
+
+      - name: Build project with Maven
+        run: mvn -B package --file api-protector-cli/pom.xml 
+
+
 
       - name: Run API Protector Diff
         uses: ./
