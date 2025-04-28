@@ -1,0 +1,27 @@
+name: API Compatibility Check
+
+on: [push]
+
+jobs:
+  build-and-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build project
+        run: ./mvnw package
+
+      - name: Run API Protector Diff
+        uses: ./
+        with:
+          old-spec-file: './swagger_2025-03-25.json' 
+          new-spec-file: './swagger_2025-03-26.json'
+          output-file: 'api-diff-output.txt' 
+
+      - name: Upload diff artifact
+        if: success() || failure() 
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-diff-report
+          path: api-diff-output.txt
