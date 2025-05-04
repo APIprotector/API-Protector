@@ -16,7 +16,7 @@ jobs:
         run: |
           sudo apt install maven
           mvn -v 
-          
+
       - name: Create settings.xml file
         run: |
           touch settings.xml
@@ -58,8 +58,8 @@ jobs:
           -Dartifact=com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT \
           -DoutputDirectory=. \
           -DrepositoryId=github \
-          --settings ./settings.xml
-
+          --settings ./settings.xml \
+          -DoutputFile=app.jar
           ls -al
 
 
