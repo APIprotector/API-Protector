@@ -8,7 +8,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          secrets: |
+            "github_user=${{ secrets.GH_PACKAGES_USER }}" 
+            "github_pat=${{ secrets.GH_PACKAGES_PAT }}"   
+            
       - name: Run API Protector Diff
         uses: ./
         with:
