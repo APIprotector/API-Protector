@@ -16,6 +16,10 @@ jobs:
         run: |
           curl -O -L https://_:${{ secrets.GH_PACKAGES_PAT }}@maven.pkg.github.com/APIprotector/API-Protector/com/apiprotector/api-protector-cli/2.0.1-SNAPSHOT/api-protector-cli-2.0.1-SNAPSHOT.jar
       
+      - name: Add permissions to jar
+        run: |
+          chmod 777 api-protector-cli-2.0.1-SNAPSHOT.jar
+
       - name: Run API Protector Diff
         uses: ./
         with:
