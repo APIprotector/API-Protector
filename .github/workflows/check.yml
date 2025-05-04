@@ -19,17 +19,16 @@ jobs:
 
       - name: Create settings.xml file
         run: |
-          cat << EOF 
-            <settings> 
-              <servers>
-                <server>
-                  <id>github</id>
-                  <username>${{ secrets.GH_PACKAGES_USER }}</username>
-                  <password>${{ secrets.GH_PACKAGES_PAT }}</password>
-                </server>
-              </servers>
-            </settings>  
-          EOF > ./settings.xml
+          touch settings.xml
+          echo "  <settings> " >> ./settings.xml
+          echo "    <servers>" >> ./settings.xml
+          echo "      <server>" >> ./settings.xml
+          echo "        <id>github</id>" >> ./settings.xml
+          echo "        <username>${{ secrets.GH_PACKAGES_USER }}</username>" >> ./settings.xml
+          echo "        <password>${{ secrets.GH_PACKAGES_PAT }}</password>" >> ./settings.xml
+          echo "      </server>" >> ./settings.xml
+          echo "    </servers>" >> ./settings.xml
+          echo "  </settings>  " >> ./settings.xml
 
           ls -al 
 
