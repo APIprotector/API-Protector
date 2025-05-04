@@ -39,7 +39,7 @@ jobs:
           echo "             <repositories> " >> settings.xml
           echo "                 <repository> " >> settings.xml
           echo "                     <id>github</id> " >> settings.xml
-          echo "                     <url>https://maven.pkg.github.com/${{ github.repository }}</url> " >> settings.xml
+          echo "                     <url>https://maven.pkg.github.com/apiprotector/API-Protector</url> " >> settings.xml
           echo "                     <snapshots> " >> settings.xml
           echo "                         <enabled>true</enabled> " >> settings.xml
           echo "                     </snapshots> " >> settings.xml
