@@ -17,18 +17,47 @@ jobs:
           sudo apt install maven
           mvn -v 
 
+
+
+          # echo "  <settings> " >> ./settings.xml
+          # echo "    <servers>" >> ./settings.xml
+          # echo "      <server>" >> ./settings.xml
+          # echo "        <id>github</id>" >> ./settings.xml
+          # echo "        <username>${{ secrets.GH_PACKAGES_USER }}</username>" >> ./settings.xml
+          # echo "        <password>${{ secrets.GH_PACKAGES_PAT }}</password>" >> ./settings.xml
+          # echo "      </server>" >> ./settings.xml
+          # echo "    </servers>" >> ./settings.xml
+          # echo "  </settings>  " >> ./settings.xml
+
       - name: Create settings.xml file
         run: |
           touch settings.xml
-          echo "  <settings> " >> ./settings.xml
-          echo "    <servers>" >> ./settings.xml
-          echo "      <server>" >> ./settings.xml
-          echo "        <id>github</id>" >> ./settings.xml
-          echo "        <username>${{ secrets.GH_PACKAGES_USER }}</username>" >> ./settings.xml
-          echo "        <password>${{ secrets.GH_PACKAGES_PAT }}</password>" >> ./settings.xml
-          echo "      </server>" >> ./settings.xml
-          echo "    </servers>" >> ./settings.xml
-          echo "  </settings>  " >> ./settings.xml
+          echo "  <settings>  " >> settings.xml
+          echo "     <profiles> " >> settings.xml
+          echo "         <profile> " >> settings.xml
+          echo "             <id>github</id> " >> settings.xml
+          echo "             <repositories> " >> settings.xml
+          echo "                 <repository> " >> settings.xml
+          echo "                     <id>github</id> " >> settings.xml
+          echo "                     <url>https://maven.pkg.github.com/API-Protector</url> " >> settings.xml
+          echo "                     <snapshots> " >> settings.xml
+          echo "                         <enabled>true</enabled> " >> settings.xml
+          echo "                     </snapshots> " >> settings.xml
+          echo "                 </repository> " >> settings.xml
+          echo "             </repositories> " >> settings.xml
+          echo "         </profile> " >> settings.xml
+          echo "     </profiles> " >> settings.xml
+          echo "     <servers> " >> settings.xml
+          echo "         <server> " >> settings.xml
+          echo "             <id>github</id> " >> settings.xml
+          echo "             <username>${{ secrets.GH_PACKAGES_USER }}</username> " >> settings.xml
+          echo "             <password>${{ secrets.GH_PACKAGES_PAT }}</password> " >> settings.xml
+          echo "         </server> " >> settings.xml
+          echo "     </servers> " >> settings.xml
+          echo " </settings> " >> settings.xml
+
+
+
 
           ls -al 
 
