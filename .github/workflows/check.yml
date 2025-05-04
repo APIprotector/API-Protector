@@ -60,8 +60,11 @@ jobs:
           -DrepositoryId=github \
           --settings ./settings.xml \
           -DoutputFile=app.jar
-          API_PROTECTOR_NAME=$(ls | grep "^api-protector-cli")
-          mv ${API_PROTECTOR_NAME} app.jar
+
+          find . --name=app.jar
+
+          # API_PROTECTOR_NAME=$(ls | grep "^api-protector-cli")
+          # mv ${API_PROTECTOR_NAME} app.jar
 
 
 
