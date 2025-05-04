@@ -13,7 +13,7 @@ inputs:
     description: 'Optional path to write the diff output.'
     required: false
 
-outputs:
+# outputs:
 
 runs:
   using: 'docker'

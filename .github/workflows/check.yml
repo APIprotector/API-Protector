@@ -12,8 +12,8 @@ jobs:
       - name: Run API Protector Diff
         uses: ./
         with:
-          old-spec-file: './swagger_2025-03-25.json' 
-          new-spec-file: './swagger_2025-03-26.json'
+          old-spec-file: ./swagger_2025-03-25.json
+          new-spec-file: ./swagger_2025-03-26.json
           output-file: 'api-diff-output.txt' 
 
       - name: Upload diff artifact
