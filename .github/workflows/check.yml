@@ -32,7 +32,12 @@ jobs:
       - name: Create settings.xml file
         run: |
           touch settings.xml
+
           echo "  <settings>  " >> settings.xml
+          echo "            <activeProfiles> " >> settings.xml
+          echo "    <activeProfile>github</activeProfile> " >> settings.xml
+          echo "  </activeProfiles> " >> settings.xml
+
           echo "     <profiles> " >> settings.xml
           echo "         <profile> " >> settings.xml
           echo "             <id>github</id> " >> settings.xml
