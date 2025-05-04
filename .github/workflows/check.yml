@@ -12,10 +12,13 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
+          context: .
+          file: ./Dockerfile
+          push: false
           secrets: |
-            "github_user=${{ secrets.GH_PACKAGES_USER }}" 
-            "github_pat=${{ secrets.GH_PACKAGES_PAT }}"   
-            
+             github_user=${{ secrets.GH_PACKAGES_USER }}
+             github_pat=${{ secrets.GH_PACKAGES_PAT }} 
+
       - name: Run API Protector Diff
         uses: ./
         with:
