@@ -10,8 +10,11 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Download jar newest version
+        env: 
+          GITHUB_PACKAGES_TOKEN: ${{ secrets.GH_PACKAGES_PAT }}
         run: |
-          wget "https://github-registry-files.githubusercontent.com/971621402/630f2680-247b-11f0-8855-38f542adf9f6?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250504%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250504T182812Z&X-Amz-Expires=300&X-Amz-Signature=9ad6f266d79f3977a3d2532297906f207621a9f4b4c8a1b20495fb2c80d45643&X-Amz-SignedHeaders=host&response-content-disposition=filename%3Dapi-protector-cli-2.0.1-20250428.195429-1.jar&response-content-type=application%2Foctet-stream" \
+          wget --header="Authorization: token $GITHUB_PACKAGES_TOKEN " \
+          "https://github-registry-files.githubusercontent.com/971621402/630f2680-247b-11f0-8855-38f542adf9f6?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250504%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250504T182812Z&X-Amz-Expires=300&X-Amz-Signature=9ad6f266d79f3977a3d2532297906f207621a9f4b4c8a1b20495fb2c80d45643&X-Amz-SignedHeaders=host&response-content-disposition=filename%3Dapi-protector-cli-2.0.1-20250428.195429-1.jar&response-content-type=application%2Foctet-stream" \
           -O apiprotector.jar
 
       - name: Run API Protector Diff
