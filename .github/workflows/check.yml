@@ -4,6 +4,9 @@ on: [push]
 
 jobs:
   build-and-diff:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
