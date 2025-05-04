@@ -33,6 +33,7 @@ RUN --mount=type=secret,id=github_user --mount=type=secret,id=github_pat \
     echo "Configuring Maven settings and building project..." && \
     mkdir -p /root/.m2 && \
     echo "<settings><servers><server><id>github</id><username>$(cat /run/secrets/github_user)</username><password>$(cat /run/secrets/github_pat)</password></server></servers></settings>" > /root/.m2/settings.xml && \
+    cd ./api-protector-cli \
     mvn clean package -DskipTests -B && \
     echo "Build complete. Cleaning up settings..." && \
     rm /root/.m2/settings.xml
