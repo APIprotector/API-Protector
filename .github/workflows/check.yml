@@ -12,13 +12,38 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Download jar newest version
+      - name: Setting up maven
+        uses: s4u/setup-maven-action@4.0.0
+
+      - name: Create settings.xml file
         run: |
-          curl -O -L https://x-access-token:${{ secrets.GH_PACKAGES_PAT }}@maven.pkg.github.com/com/apiprotector/api-protector-cli/2.0.1-SNAPSHOT/api-protector-cli-2.0.1-SNAPSHOT.jar
-          cat api-protector-cli-2.0.1-SNAPSHOT.jar
-      - name: Add permissions to jar
+          echo """
+            <settings>
+              <servers>
+                <server>
+                  <id>github</id>
+                  <username>${{ secrets.GH_PACKAGES_USER }}</username>
+                  <password>${{ secrets.GH_PACKAGES_PAT }}</password>
+                </server>
+              </servers>
+            </settings>  
+          """ > settings.xml
+
+      - name: Run maven
         run: |
-          chmod 777 api-protector-cli-2.0.1-SNAPSHOT.jar
+          mvn dependency:copy \
+          -Dartifact=com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT \
+          -DoutputDirectory=. \
+          -DrepositoryId=github '
+          --global-settings settings.xml
+      
+      # - name: Download jar newest version
+      #   run: |
+      #     curl -O -L https://x-access-token:${{ secrets.GH_PACKAGES_PAT }}@maven.pkg.github.com/com/apiprotector/api-protector-cli/2.0.1-SNAPSHOT/api-protector-cli-2.0.1-SNAPSHOT.jar
+      #     cat api-protector-cli-2.0.1-SNAPSHOT.jar
+      # - name: Add permissions to jar
+      #   run: |
+      #     chmod 777 api-protector-cli-2.0.1-SNAPSHOT.jar
 
       - name: Run API Protector Diff
         uses: ./
