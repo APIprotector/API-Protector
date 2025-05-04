@@ -15,7 +15,7 @@ jobs:
       - name: Download jar newest version
         run: |
           curl -O -L https://x-access-token:${{ secrets.GH_PACKAGES_PAT }}@maven.pkg.github.com/com/apiprotector/api-protector-cli/2.0.1-SNAPSHOT/api-protector-cli-2.0.1-SNAPSHOT.jar
-          cat api-protector-cli-2.0.1.jar
+          cat api-protector-cli-2.0.1-SNAPSHOT.jar
       - name: Add permissions to jar
         run: |
           chmod 777 api-protector-cli-2.0.1-SNAPSHOT.jar
