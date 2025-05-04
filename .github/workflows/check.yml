@@ -29,15 +29,15 @@ jobs:
                 </server>
               </servers>
             </settings>  
-          EOF > settings.xml
+          EOF > ./settings.xml
 
-      - name: Run maven
-        run: |
+          ls -al 
+
           mvn dependency:copy \
           -Dartifact=com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT \
           -DoutputDirectory=. \
           -DrepositoryId=github \
-          --settings settings.xml
+          --settings ./settings.xml
       
       # - name: Download jar newest version
       #   run: |
