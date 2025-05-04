@@ -1,6 +1,6 @@
 name: 'API Protector Diff Action'
 description: 'Compares two API specification files (JSON/YAML) and reports differences and compatibility.'
-author: 'Your Name/Organization'
+author: 'API-PROTECTOR'
 
 inputs:
   old-spec-file:
