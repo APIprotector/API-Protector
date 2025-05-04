@@ -37,7 +37,7 @@ jobs:
           -Dartifact=com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT \
           -DoutputDirectory=. \
           -DrepositoryId=github \
-          --global-settings settings.xml
+          --settings settings.xml
       
       # - name: Download jar newest version
       #   run: |
