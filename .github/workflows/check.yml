@@ -16,19 +16,7 @@ jobs:
         run: |
           sudo apt install maven
           mvn -v 
-
-
-
-          # echo "  <settings> " >> ./settings.xml
-          # echo "    <servers>" >> ./settings.xml
-          # echo "      <server>" >> ./settings.xml
-          # echo "        <id>github</id>" >> ./settings.xml
-          # echo "        <username>${{ secrets.GH_PACKAGES_USER }}</username>" >> ./settings.xml
-          # echo "        <password>${{ secrets.GH_PACKAGES_PAT }}</password>" >> ./settings.xml
-          # echo "      </server>" >> ./settings.xml
-          # echo "    </servers>" >> ./settings.xml
-          # echo "  </settings>  " >> ./settings.xml
-
+          
       - name: Create settings.xml file
         run: |
           touch settings.xml
@@ -71,14 +59,9 @@ jobs:
           -DoutputDirectory=. \
           -DrepositoryId=github \
           --settings ./settings.xml
-      
-      # - name: Download jar newest version
-      #   run: |
-      #     curl -O -L https://x-access-token:${{ secrets.GH_PACKAGES_PAT }}@maven.pkg.github.com/com/apiprotector/api-protector-cli/2.0.1-SNAPSHOT/api-protector-cli-2.0.1-SNAPSHOT.jar
-      #     cat api-protector-cli-2.0.1-SNAPSHOT.jar
-      # - name: Add permissions to jar
-      #   run: |
-      #     chmod 777 api-protector-cli-2.0.1-SNAPSHOT.jar
+
+          ls -al
+
 
       - name: Run API Protector Diff
         uses: ./
