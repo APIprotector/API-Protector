@@ -20,7 +20,7 @@
 # ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
-FROM maven:3.8-openjdk-17 AS builder
+FROM FROM maven:3.9-eclipse-temurin-21 AS builder
 
 WORKDIR /app
 
