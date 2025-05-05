@@ -56,10 +56,11 @@ jobs:
           echo "###################################"
           ls -al 
 
-          ls | grep -E '^api-protector-cli-2\.0\.1-*'
+          API_PROTECTOR_NAME=$(ls | grep -E '^api-protector-cli-2\.0\.1-*')
+          echo "${API_PROTECTOR_NAME}"
 
-          # # API_PROTECTOR_NAME=$(ls | grep "^api-protector-cli")
-          # # mv ${API_PROTECTOR_NAME} app.jar
+          mv "${API_PROTECTOR_NAME}" app.jar
+          ls -al
 
 
 
