@@ -53,18 +53,21 @@ jobs:
 
 
           ls -al 
+          mvn dependency:copy -Dartifact=com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT -DoutputDirectory=. -DrepositoryId=github --settings ./settings.xml
+          echo "###################################"
+          ls -al 
 
-          mvn dependency:copy \
-          -Dartifact=com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT \
-          -DoutputDirectory=. \
-          -DrepositoryId=github \
-          --settings ./settings.xml \
-          -DoutputFile=app.jar
+          # mvn dependency:copy \
+          # -Dartifact=com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT \
+          # -DoutputDirectory=. \
+          # -DrepositoryId=github \
+          # --settings ./settings.xml \
+          # -DoutputFile=app.jar
 
-          find / -name app.jar
+          # find / -name app.jar
 
-          # API_PROTECTOR_NAME=$(ls | grep "^api-protector-cli")
-          # mv ${API_PROTECTOR_NAME} app.jar
+          # # API_PROTECTOR_NAME=$(ls | grep "^api-protector-cli")
+          # # mv ${API_PROTECTOR_NAME} app.jar
 
 
 
