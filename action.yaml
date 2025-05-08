@@ -6,12 +6,16 @@ inputs:
   old-spec-file:
     description: 'Path to the old API specification file (YAML or JSON).'
     required: true
+    type: string
   new-spec-file:
     description: 'Path to the new API specification file (YAML or JSON).'
     required: true
+    type: string
   output-file:
     description: 'Optional path to write the diff output.'
     required: false
+    default: true
+    type: boolean
 
 # outputs:
 
@@ -23,7 +27,3 @@ runs:
     - ${{ inputs.new-spec-file }}
     - ${{ inputs.output-file && '-o' }}
     - ${{ inputs.output-file && inputs.output-file }}
-
-branding:
-  icon: 'shield' # Choose an icon from Feather icons (https://feathericons.com/)
-  color: 'blue'  # Choose a color (e.g., yellow, blue, green, etc.)
