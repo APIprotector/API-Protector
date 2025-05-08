@@ -63,8 +63,7 @@ echo "ls - al"
 ls -al
 echo "pwd:"
 pwd
-mv "${DOWNLOADED_JAR_NAME}" "/app/app.jar"
-echo "JAR renamed to /app/app.jar"
+mv "${DOWNLOADED_JAR_NAME}" "app.jar"
 
 # For debugging, list files to confirm app.jar is present
 ls -al /app
@@ -108,6 +107,6 @@ ls -al /app
 echo "${OLD_SPEC_FILE}"
 echo "${NEW_SPEC_FILE}"
 
-java -jar "/app/app.jar" "${OLD_SPEC_FILE} ${NEW_SPEC_FILE}"
+java -jar "app.jar" "${OLD_SPEC_FILE} ${NEW_SPEC_FILE}"
 
 echo "--- API Compatibility Check Action Finished ---"
