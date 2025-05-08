@@ -59,6 +59,10 @@ if [ -z "${DOWNLOADED_JAR_NAME}" ]; then
   exit 1
 fi
 echo "Found JAR: ${DOWNLOADED_JAR_NAME}"
+echo "ls - al"
+ls -al
+echo "pwd:"
+pwd
 mv "/app/${DOWNLOADED_JAR_NAME}" "/app/app.jar"
 echo "JAR renamed to /app/app.jar"
 
