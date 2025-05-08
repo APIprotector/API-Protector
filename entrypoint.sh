@@ -75,16 +75,19 @@ JAVA_COMMAND_ARGS=()
 JAVA_COMMAND_ARGS+=("${OLD_SPEC_FILE}")
 JAVA_COMMAND_ARGS+=("${NEW_SPEC_FILE}")
 
-# Handle the optional output file argument
-# If OUTPUT_FILE_NAME is set to a non-empty string (and not just "true" or "false" if an old boolean habit remains)
-if [ -n "${OUTPUT_FILE_NAME}" ] && [ "${OUTPUT_FILE_NAME}" != "true" ] && [ "${OUTPUT_FILE_NAME}" != "false" ]; then
-  JAVA_COMMAND_ARGS+=("-o")
-  JAVA_COMMAND_ARGS+=("${OUTPUT_FILE_NAME}")
-else
-  echo "Output file name not specified or is a boolean-like string; tool will use default output behavior."
-fi
+# For debugging, list files to confirm app.jar is present
+echo "checking where we are"
+echo "checking where we are"
 
-echo "Running: java -jar /app/app.jar ${JAVA_COMMAND_ARGS[@]}"
+echo "checking where we are"
+
+echo "checking where we are"
+
+echo "checking where we are"
+
+ls -al 
+
+
 java -jar "/app/app.jar" "${JAVA_COMMAND_ARGS[@]}"
 
 echo "--- API Compatibility Check Action Finished ---"
