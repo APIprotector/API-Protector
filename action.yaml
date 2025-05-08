@@ -29,8 +29,10 @@ runs:
   env:
     GH_PACKAGES_USER: ${{ inputs.gh_packages_user }}
     GH_PACKAGES_PAT: ${{ inputs.gh_packages_pat }}
-  args:
-    - ${{ inputs.old-spec-file }}
-    - ${{ inputs.new-spec-file }}
-    - ${{ inputs.output-file && '-o' }}
-    - ${{ inputs.output-file && inputs.output-file }}
+    OLD_SPEC_FILE: ${{ inputs.old-spec-file }}
+    NEW_SPEC_FILE: ${{ inputs.new-spec-file }}
+  # args:
+  #   - ${{ inputs.old-spec-file }}
+  #   - ${{ inputs.new-spec-file }}
+  #   - ${{ inputs.output-file && '-o' }}
+  #   - ${{ inputs.output-file && inputs.output-file }}
