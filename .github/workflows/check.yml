@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run API Protector Diff
-        uses: APIprotector/APIProtectorACTION
+        uses: APIprotector/APIProtectorACTION@main
         with:
           old-spec-file: ./swagger_2025-03-25.json
           new-spec-file: ./swagger_2025-03-26.json 
