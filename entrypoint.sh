@@ -106,6 +106,6 @@ ls -al /app
 
 
 
-java -jar "/app/app.jar" "${JAVA_COMMAND_ARGS[@]}"
+java -jar "/app/app.jar" "${OLD_SPEC_FILE} ${NEW_SPEC_FILE}"
 
 echo "--- API Compatibility Check Action Finished ---"
