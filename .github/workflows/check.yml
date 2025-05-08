@@ -12,73 +12,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      # - name: Setting up maven
-      #   run: |
-      #     sudo apt install maven
-      #     mvn -v 
-
-      # - name: Create settings.xml file
-      #   run: |
-      #     touch settings.xml
-
-      #     echo "  <settings>  " >> settings.xml
-      #     echo "            <activeProfiles> " >> settings.xml
-      #     echo "    <activeProfile>github</activeProfile> " >> settings.xml
-      #     echo "  </activeProfiles> " >> settings.xml
-
-      #     echo "     <profiles> " >> settings.xml
-      #     echo "         <profile> " >> settings.xml
-      #     echo "             <id>github</id> " >> settings.xml
-      #     echo "             <repositories> " >> settings.xml
-      #     echo "                 <repository> " >> settings.xml
-      #     echo "                     <id>github</id> " >> settings.xml
-      #     echo "                     <url>https://maven.pkg.github.com/apiprotector/API-Protector</url> " >> settings.xml
-      #     echo "                     <snapshots> " >> settings.xml
-      #     echo "                         <enabled>true</enabled> " >> settings.xml
-      #     echo "                     </snapshots> " >> settings.xml
-      #     echo "                 </repository> " >> settings.xml
-      #     echo "             </repositories> " >> settings.xml
-      #     echo "         </profile> " >> settings.xml
-      #     echo "     </profiles> " >> settings.xml
-      #     echo "     <servers> " >> settings.xml
-      #     echo "         <server> " >> settings.xml
-      #     echo "             <id>github</id> " >> settings.xml
-      #     echo "             <username>${{ secrets.GH_PACKAGES_USER }}</username> " >> settings.xml
-      #     echo "             <password>${{ secrets.GH_PACKAGES_PAT }}</password> " >> settings.xml
-      #     echo "         </server> " >> settings.xml
-      #     echo "     </servers> " >> settings.xml
-      #     echo " </settings> " >> settings.xml
-
-
-
-
-      #     mvn dependency:copy -Dartifact=com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT -DoutputDirectory=. -DrepositoryId=github --settings ./settings.xml
-      #     echo "###################################"
-      #     ls -al 
-
-      #     API_PROTECTOR_NAME=$(ls | grep -E '^api-protector-cli-2\.0\.1-*')
-      #     echo "${API_PROTECTOR_NAME}"
-
-      #     mv "${API_PROTECTOR_NAME}" app.jar
-      #     ls -al
-
-
-
       - name: Run API Protector Diff
-        uses: ./ # Assumes your action (action.yml, Dockerfile, entrypoint.sh) is in the root
-                # If it's in a subdirectory like ./.github/actions/my-action, use that path.
+        uses: APIprotector/APIProtectorACTION
         with:
-          old-spec-file: ./swagger_2025-03-25.json # Ensure this file path is correct
-          new-spec-file: ./swagger_2025-03-26.json # Ensure this file path is correct
-          output_file_name: 'api-diff-output.txt'   # This will be the name of the output file
-          gh_packages_user: ${{ secrets.GH_PACKAGES_USER }} # Your GitHub username or actor
-          gh_packages_pat: ${{ secrets.GH_PACKAGES_PAT }}   # Your PAT (e.g., GITHUB_TOKEN or a custom PAT)
+          old-spec-file: ./swagger_2025-03-25.json
+          new-spec-file: ./swagger_2025-03-26.json 
+          output_file_name: 'api-diff-output.txt'  
+          gh_packages_user: ${{ secrets.GH_PACKAGES_USER }} 
+          gh_packages_pat: ${{ secrets.GH_PACKAGES_PAT }}   
 
       - name: Upload diff artifact
-        if: always() # Or success() || failure()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: api-diff-report
-          # This path should match the output_file_name used by the action,
-          # relative to the GITHUB_WORKSPACE.
           path: api-diff-output.txt
