@@ -14,8 +14,6 @@ inputs:
   output-file:
     description: 'Optional path to write the diff output.'
     required: false
-    default: true
-    type: boolean
   gh_packages_user:
     description: 'Username for GitHub Packages.'
     required: true
