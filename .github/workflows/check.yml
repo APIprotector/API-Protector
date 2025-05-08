@@ -65,17 +65,20 @@ jobs:
 
 
       - name: Run API Protector Diff
-        uses: ./
+        uses: ./ # Assumes your action (action.yml, Dockerfile, entrypoint.sh) is in the root
+                # If it's in a subdirectory like ./.github/actions/my-action, use that path.
         with:
-          old-spec-file: ./swagger_2025-03-25.json
-          new-spec-file: ./swagger_2025-03-26.json
-          output-file: 'api-diff-output.txt' 
-          gh_packages_user: ${{ secrets.GH_PACKAGES_USER }} 
-          gh_packages_pat: ${{ secrets.GH_PACKAGES_PAT }}  
+          old-spec-file: ./swagger_2025-03-25.json # Ensure this file path is correct
+          new-spec-file: ./swagger_2025-03-26.json # Ensure this file path is correct
+          output_file_name: 'api-diff-output.txt'   # This will be the name of the output file
+          gh_packages_user: ${{ secrets.GH_PACKAGES_USER }} # Your GitHub username or actor
+          gh_packages_pat: ${{ secrets.GH_PACKAGES_PAT }}   # Your PAT (e.g., GITHUB_TOKEN or a custom PAT)
 
       - name: Upload diff artifact
-        if: success() || failure() 
+        if: always() # Or success() || failure()
         uses: actions/upload-artifact@v4
         with:
           name: api-diff-report
+          # This path should match the output_file_name used by the action,
+          # relative to the GITHUB_WORKSPACE.
           path: api-diff-output.txt
