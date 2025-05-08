@@ -1,15 +1,11 @@
 #!/bin/bash
-set -e # Exit immediately if a command exits with a non-zero status
+set -e
 
 echo "--- API Compatibility Check Action Entrypoint ---"
 
-# Environment variables are passed from the action.yml 'env' block:
-# GH_PACKAGES_USER, GH_PACKAGES_PAT
-# OLD_SPEC_FILE, NEW_SPEC_FILE, OUTPUT_FILE_NAME
-
 # 1. Create Maven settings.xml dynamically
 echo "Creating Maven settings.xml..."
-SETTINGS_XML_PATH="/app/settings.xml" # Create in the WORKDIR
+SETTINGS_XML_PATH="/app/settings.xml"
 cat << EOF > ${SETTINGS_XML_PATH}
 <settings>
   <activeProfiles>
@@ -41,9 +37,8 @@ echo "settings.xml created at ${SETTINGS_XML_PATH}"
 
 # 2. Download the JAR using Maven
 echo "Downloading API Protector CLI JAR..."
-JAR_ARTIFACT="com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT" # Make this an input if it changes often
-# Using --batch-mode for non-interactive execution, --quiet to reduce logs
-# -Dmdep.stripVersion=false ensures the version is part of the filename, matching your grep logic
+JAR_ARTIFACT="com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT" 
+
 mvn dependency:copy -Dartifact=${JAR_ARTIFACT} -DoutputDirectory=. -Dmdep.stripVersion=false -DrepositoryId=github --settings ${SETTINGS_XML_PATH} --batch-mode --quiet
 echo "JAR download command executed."
 
@@ -59,53 +54,11 @@ if [ -z "${DOWNLOADED_JAR_NAME}" ]; then
   exit 1
 fi
 echo "Found JAR: ${DOWNLOADED_JAR_NAME}"
-echo "ls - al"
-ls -al
-echo "pwd:"
-pwd
-mv "${DOWNLOADED_JAR_NAME}" "app.jar"
 
-# For debugging, list files to confirm app.jar is present
-ls -al /app
+mv "${DOWNLOADED_JAR_NAME}" "app.jar"
 
 # 4. Execute the Java application
 echo "Executing app.jar..."
-JAVA_COMMAND_ARGS=()
-JAVA_COMMAND_ARGS+=("${OLD_SPEC_FILE}")
-JAVA_COMMAND_ARGS+=("${NEW_SPEC_FILE}")
-
-# For debugging, list files to confirm app.jar is present
-echo "checking where we are"
-echo "checking where we are"
-
-echo "checking where we are"
-
-echo "checking where we are"
-
-echo "checking where we are"
-
-ls -al 
-
-
-echo "checking what files are being provided"
-echo "checking what files are being provided"
-
-echo "checking what files are being provided"
-
-echo "checking what files are being provided"
-echo "${JAVA_COMMAND_ARGS[@]}"
-
-
-
-echo "checking what is in /app directory"
-echo "checking what is in /app directory"
-echo "checking what is in /app directory"
-echo "checking what is in /app directory"
-ls -al /app
-
-
-echo "${OLD_SPEC_FILE}"
-echo "${NEW_SPEC_FILE}"
 
 java -jar "app.jar" "${OLD_SPEC_FILE}" "${NEW_SPEC_FILE}"
 

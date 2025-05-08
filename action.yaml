@@ -21,7 +21,6 @@ inputs:
     description: 'Personal Access Token (PAT)'
     required: true
 
-# outputs:
 
 runs:
   using: 'docker'
@@ -31,8 +30,3 @@ runs:
     GH_PACKAGES_PAT: ${{ inputs.gh_packages_pat }}
     OLD_SPEC_FILE: ${{ inputs.old-spec-file }}
     NEW_SPEC_FILE: ${{ inputs.new-spec-file }}
-  # args:
-  #   - ${{ inputs.old-spec-file }}
-  #   - ${{ inputs.new-spec-file }}
-  #   - ${{ inputs.output-file && '-o' }}
-  #   - ${{ inputs.output-file && inputs.output-file }}
