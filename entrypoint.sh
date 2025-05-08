@@ -88,6 +88,24 @@ echo "checking where we are"
 ls -al 
 
 
+echo "checking what files are being provided"
+echo "checking what files are being provided"
+
+echo "checking what files are being provided"
+
+echo "checking what files are being provided"
+echo "${JAVA_COMMAND_ARGS[@]}"
+
+
+
+echo "checking what is in /app directory"
+echo "checking what is in /app directory"
+echo "checking what is in /app directory"
+echo "checking what is in /app directory"
+ls -al /app
+
+
+
 java -jar "/app/app.jar" "${JAVA_COMMAND_ARGS[@]}"
 
 echo "--- API Compatibility Check Action Finished ---"
