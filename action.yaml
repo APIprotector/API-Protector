@@ -6,30 +6,33 @@ inputs:
   old-spec-file:
     description: 'Path to the old API specification file (YAML or JSON).'
     required: true
+    type: string
   new-spec-file:
     description: 'Path to the new API specification file (YAML or JSON).'
     required: true
-  output_file_name: # Renamed for clarity, this will be the output filename
-    description: 'Filename for the diff output. If empty or not a valid name, output behavior is tool-dependent.'
+    type: string
+  output-file:
+    description: 'Optional path to write the diff output.'
     required: false
-    default: 'api-diff-output.txt' # A sensible default filename
+    default: true
+    type: boolean
   gh_packages_user:
-    description: 'Username for GitHub Packages (e.g., ${{ github.actor }}).'
+    description: 'Username for GitHub Packages.'
     required: true
   gh_packages_pat:
-    description: 'Personal Access Token (PAT) for GitHub Packages (e.g., ${{ secrets.GITHUB_TOKEN }} or a custom PAT).'
+    description: 'Personal Access Token (PAT)'
     required: true
+
+# outputs:
 
 runs:
   using: 'docker'
-  image: 'Dockerfile' # Points to your Dockerfile
+  image: 'Dockerfile'
   env:
-    # Pass inputs and secrets as environment variables to the Docker container
-    # These will be used by entrypoint.sh
     GH_PACKAGES_USER: ${{ inputs.gh_packages_user }}
     GH_PACKAGES_PAT: ${{ inputs.gh_packages_pat }}
-    OLD_SPEC_FILE: ${{ inputs.old-spec-file }}
-    NEW_SPEC_FILE: ${{ inputs.new-spec-file }}
-    OUTPUT_FILE_NAME: ${{ inputs.output_file_name }}
-  # 'args' are no longer needed here directly, as entrypoint.sh will
-  # construct the final java -jar command based on the ENV variables.
+  args:
+    - ${{ inputs.old-spec-file }}
+    - ${{ inputs.new-spec-file }}
+    - ${{ inputs.output-file && '-o' }}
+    - ${{ inputs.output-file && inputs.output-file }}
