@@ -63,7 +63,7 @@ echo "ls - al"
 ls -al
 echo "pwd:"
 pwd
-mv "/app/${DOWNLOADED_JAR_NAME}" "/app/app.jar"
+mv "${DOWNLOADED_JAR_NAME}" "/app/app.jar"
 echo "JAR renamed to /app/app.jar"
 
 # For debugging, list files to confirm app.jar is present
