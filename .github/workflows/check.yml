@@ -15,8 +15,8 @@ jobs:
       - name: Run API Protector Diff
         uses: APIprotector/APIProtectorACTION@main
         with:
-          old-spec-file: ./swagger_2025-03-25.json
-          new-spec-file: ./swagger_2025-03-26.json 
+          old-spec-file: ./petstore2.json
+          new-spec-file: ./petstore2_changes.json
           output_file_name: 'api-diff-output.txt'  
           gh_packages_user: ${{ secrets.GH_PACKAGES_USER }} 
           gh_packages_pat: ${{ secrets.GH_PACKAGES_PAT }}   
