@@ -193,41 +193,7 @@ public class JsonRenderer implements Render {
 
     private Map<String, Object> schemaChanges(ChangedSchema schema) {
         Map<String, Object> entry = new LinkedHashMap<>();
-        if (schema.isChangedType()) {
-            entry.put("changedType", Map.of(
-                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getType() : null,
-                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getType() : null
-            ));
-        } else {
-            entry.put("changedType", new ArrayList<>());
-        }
-
-        if (schema.isChangeFormat()) {
-            entry.put("changedFormat", Map.of(
-                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getFormat() : null,
-                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getFormat() : null
-            ));
-        } else {
-            entry.put("changedFormat", new ArrayList<>());
-        }
-
-        if (schema.isChangeDefault()) {
-            entry.put("changedDefault", Map.of(
-                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getDefault() : null,
-                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getDefault() : null
-            ));
-        } else {
-            entry.put("changedDefault", new ArrayList<>());
-        }
-
-        if (schema.isChangeDeprecated()) {
-            entry.put("changedDeprecated", Map.of(
-                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getDeprecated() : null,
-                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getDeprecated() : null
-            ));
-        } else {
-            entry.put("changedDefault", new ArrayList<>());
-        }
+        populateMap(schema, entry);
 
         if (!schema.getChangedProperties().isEmpty()) {
             List<Map<String, Object>> changedProps = new ArrayList<>();
@@ -259,42 +225,8 @@ public class JsonRenderer implements Render {
             String newTitle = newPath.substring(newSchema.get$ref().lastIndexOf("/") + 1);
             entry.put("ref", oldPath.equals(newPath) ? oldPath : null);
             entry.put("title", oldTitle.equals(newTitle) ?  oldTitle : null);
-
         }
-        if (schema.isChangedType()) {
-            entry.put("changedType", Map.of(
-                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getType() : null,
-                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getType() : null
-            ));
-        } else {
-            entry.put("changedType", new ArrayList<>());
-        }
-
-        if (schema.isChangeFormat()) {
-            entry.put("changedFormat", Map.of(
-                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getFormat() : null,
-                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getFormat() : null
-            ));
-        } else {
-            entry.put("changedFormat", new ArrayList<>());
-        }
-        if (schema.isChangeDefault()) {
-            entry.put("changedDefault", Map.of(
-                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getDefault() : null,
-                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getDefault() : null
-            ));
-        } else {
-            entry.put("changedDefault", new ArrayList<>());
-        }
-
-        if (schema.isChangeDeprecated()) {
-            entry.put("changedDeprecated", Map.of(
-                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getDeprecated() : null,
-                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getDeprecated() : null
-            ));
-        } else {
-            entry.put("changedDefault", new ArrayList<>());
-        }
+        populateMap(schema, entry);
 
         if (!schema.getChangedProperties().isEmpty()) {
             List<Map<String, Object>> changedProps = new ArrayList<>();
@@ -313,6 +245,43 @@ public class JsonRenderer implements Render {
         return entry;
     }
 
+    private void populateMap(ChangedSchema schema, Map<String, Object> entry) {
+        if (schema.isChangedType()) {
+            entry.put("changedType", Map.of(
+                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getType() : "null",
+                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getType() : "null"
+            ));
+        } else {
+            entry.put("changedType", new ArrayList<>());
+        }
+
+        if (schema.isChangeFormat()) {
+            entry.put("changedFormat", Map.of(
+                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getFormat() : "null",
+                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getFormat() : "null"
+            ));
+        } else {
+            entry.put("changedFormat", new ArrayList<>());
+        }
+        if (schema.isChangeDefault()) {
+            entry.put("changedDefault", Map.of(
+                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getDefault() : "null",
+                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getDefault() : "null"
+            ));
+        } else {
+            entry.put("changedDefault", new ArrayList<>());
+        }
+
+        if (schema.isChangeDeprecated()) {
+            entry.put("changedDeprecated", Map.of(
+                    "before", schema.getOldSchema() != null ? schema.getOldSchema().getDeprecated() : "null",
+                    "after", schema.getNewSchema() != null ? schema.getNewSchema().getDeprecated() : "null"
+            ));
+        } else {
+            entry.put("changedDefault", new ArrayList<>());
+        }
+    }
+
     public Map<String, Map<String, Object>> compareSchemas(Schema<?> s1, Schema<?> s2) {
         Map<String, Map<String, Object>> changes = new LinkedHashMap<>();
 
@@ -326,8 +295,8 @@ public class JsonRenderer implements Render {
         BiConsumer<String, Object[]> addDiff = (field, values) -> {
             if (!Objects.equals(values[0], values[1])) {
                 changes.put(field, Map.of(
-                        "before", values[0],
-                        "after", values[1]
+                        "before", values[0] != null ? values[0] : "null",
+                        "after", values[1] != null ? values[1] : "null"
                 ));
             }
         };
