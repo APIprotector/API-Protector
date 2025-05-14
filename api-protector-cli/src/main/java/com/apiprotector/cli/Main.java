@@ -76,9 +76,6 @@ public class Main {
                     else {
                         writer.write(compatibilityInfo);
                     }
-                    if (!cmd.hasOption("s")) {
-                        System.out.println("Output written to " + outputFile);
-                    }
                 }
                 catch (IOException e) {
                     System.err.println("Error writing to file: " + e.getMessage());
@@ -123,8 +120,15 @@ public class Main {
         Options options = new Options();
         options.addOption("h", "help"
                 , false, "Display help information");
-        options.addOption("o", "output"
-                , true, "Output file");
+        options.addOption(
+                Option.
+                        builder("o").
+                        longOpt("output").
+                        hasArg().
+                        desc("output file").
+                        argName("OUTPUT").
+                        build()
+        );
         options.addOption("e", "error"
                 , false, "Exit with error code if the OpenAPI changes are not compatible");
 
