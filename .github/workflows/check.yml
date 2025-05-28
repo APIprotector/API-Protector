@@ -13,13 +13,13 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run API Protector Diff
-        uses: APIprotector/APIProtectorACTION@main
+        uses: APIprotector/APIProtectorACTION@feature
         with:
           old-spec-file: ./petstore2.json
           new-spec-file: ./petstore2_changes.json
           output_file_name: 'api-diff-output.txt'  
-          gh_packages_user: ${{ secrets.GH_PACKAGES_USER }} 
-          gh_packages_pat: ${{ secrets.GH_PACKAGES_PAT }}   
+          # gh_packages_user: ${{ secrets.GH_PACKAGES_USER }} 
+          # gh_packages_pat: ${{ secrets.GH_PACKAGES_PAT }}   
 
       - name: Upload diff artifact
         if: always()
