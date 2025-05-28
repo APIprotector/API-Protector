@@ -1,6 +1,8 @@
 
 name: CI/CD pipeline for successful merge
-on: [push]
+on: 
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
