@@ -1,6 +1,8 @@
 name: API Compatibility Check
 
-on: [push]
+on: 
+  push:
+  workflow_dispatch:
 
 jobs:
   build-and-diff:
