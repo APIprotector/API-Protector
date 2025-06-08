@@ -20,6 +20,8 @@ jobs:
           old-spec-file: ./petstore2.json
           new-spec-file: ./petstore2_changes.json
           output-file: 'api-diff-output.txt'
+          exit-on-error: true
+          verbose: true
 
       - name: Upload diff artifact
         if: always()
