@@ -19,8 +19,8 @@ jobs:
           echo "--- API Compatibility Check Action Entrypoint ---"
           # 1. Create Maven settings.xml dynamically
           echo "Creating Maven settings.xml..."
-          SETTINGS_XML_PATH="./app/settings.xml"
           mkdir -p ./app
+          SETTINGS_XML_PATH="./app/settings.xml"
           cat << EOF > ${SETTINGS_XML_PATH}
           <settings>
             <activeProfiles>
