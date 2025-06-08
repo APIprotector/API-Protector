@@ -57,7 +57,7 @@ jobs:
           # Using a placeholder pom.xml path to satisfy maven if it needs one.
           # Create an empty pom.xml if needed, or remove -f if your maven setup doesn't require it for dependency:copy
           touch ./app/pom.xml_placeholder
-          mvn dependency:copy -Dartifact=${JAR_ARTIFACT} -DoutputDirectory=. -Dmdep.stripVersion=false -DrepositoryId=github --settings ${SETTINGS_XML_PATH} --batch-mode --quiet -f ./app/pom.xml_placeholder
+          mvn dependency:copy -Dartifact=${JAR_ARTIFACT} -DoutputDirectory=./app -Dmdep.stripVersion=false -DrepositoryId=github --settings ${SETTINGS_XML_PATH} --batch-mode --quiet
           echo "JAR download command executed."
           
           # 3. Locate and rename the JAR
