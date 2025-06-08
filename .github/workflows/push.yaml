@@ -12,11 +12,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: download jar
+        env:
+          GH_PACKAGES_USER: ${{ secrets.GH_PACKAGES_USER }}
+          GH_PACKAGES_PAT: ${{ secrets.GH_PACKAGES_PAT }}
         run: |
           echo "--- API Compatibility Check Action Entrypoint ---"
           # 1. Create Maven settings.xml dynamically
           echo "Creating Maven settings.xml..."
           SETTINGS_XML_PATH="./app/settings.xml"
+          mkdir -p ./app
           cat << EOF > ${SETTINGS_XML_PATH}
           <settings>
             <activeProfiles>
