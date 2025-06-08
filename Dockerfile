@@ -6,7 +6,7 @@ RUN apk update && \
 WORKDIR /app
 
 # This entrypoint.sh should be in the root of your custom-action branch
-COPY /app/app.jar /app/app.jar
+COPY app/app.jar /app/app.jar
 COPY entrypoint.sh /app/entrypoint.sh
 
 RUN chmod +x /app/entrypoint.sh
