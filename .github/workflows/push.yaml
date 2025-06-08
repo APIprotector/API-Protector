@@ -52,7 +52,7 @@ jobs:
           
           # 2. Download the JAR using Maven
           echo "Downloading API Protector CLI JAR..."
-          JAR_ARTIFACT="com.apiprotector:api-protector-cli:2.0.1-SNAPSHOT"
+          JAR_ARTIFACT="com.apiprotector:api-protector-cli:2.1.1-SNAPSHOT"
           
           # Using a placeholder pom.xml path to satisfy maven if it needs one.
           # Create an empty pom.xml if needed, or remove -f if your maven setup doesn't require it for dependency:copy
@@ -62,7 +62,7 @@ jobs:
           
           # 3. Locate and rename the JAR
           echo "Locating and renaming JAR..."
-          DOWNLOADED_JAR_NAME=$(ls ./app | grep -E '^api-protector-cli-2\.0\.1-.*\.jar$' | head -n 1)
+          DOWNLOADED_JAR_NAME=$(ls ./app | grep -E '^api-protector-cli-2\.1\.1-.*\.jar$' | head -n 1)
           
           if [ -z "${DOWNLOADED_JAR_NAME}" ]; then
             echo "Error: Downloaded API Protector JAR not found in ./app directory!"
