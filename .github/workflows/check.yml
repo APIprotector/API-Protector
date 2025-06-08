@@ -19,7 +19,7 @@ jobs:
         with:
           old-spec-file: ./petstore2.json
           new-spec-file: ./petstore2_changes.json
-          output_file_name: 'api-diff-output.txt'
+          output-file: 'api-diff-output.txt'
 
       - name: Upload diff artifact
         if: always()
